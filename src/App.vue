@@ -1,48 +1,58 @@
 <template>
-  <img class="logo" alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld :msg="msg"/>
-  <div class="btn">
-    <el-button type="primary" @click="startHacking">
-      Get Started
-    </el-button>
-  </div>
+  <img
+    class="logo"
+    alt="Vue logo"
+    src="./assets/logo.png"
+  >
+  <HelloWorld :msg="msg" />
+  <el-button
+    type="danger"
+    @click="handleClick"
+  >按钮</el-button>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script lang="ts">
+import {defineComponent, reactive, toRefs} from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
+import {ElMessage} from 'element-plus'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  setup() {
-    const msg = ref("Welcome to Element Plus, a Vue 3.0 based component library")
-    const startHacking = () => {
-      msg.value = "Start coding with Element Plus with 💖"
-    }
-    return {
-      msg,
-      startHacking
-    }
-  }
+interface State {
+    msg: string
 }
+
+export default defineComponent({
+    name: 'App',
+    components: {
+        HelloWorld
+    },
+
+    setup() {
+        const state: State = reactive({
+            msg: 'Welcome to Your Vue.js + TypeScript App'
+        })
+        const handleClick = e => {
+            console.log(e)
+            state.msg = '哈哈，我修改了这个数据啦，哈哈'
+            ElMessage('只是一条消息提示')
+        }
+        return {
+            handleClick,
+            ...toRefs(state)
+        }
+    }
+})
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 .logo {
-  width: 50%;
-}
-.btn {
-  margin-top: 100px;
+    width: 50%;
 }
 </style>
