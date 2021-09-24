@@ -17,7 +17,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import {ElMessage} from 'element-plus'
 
 interface State {
-    msg: string
+    msg: String
 }
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
         const state: State = reactive({
             msg: 'Welcome to Your Vue.js + TypeScript App'
         })
-        const handleClick = e => {
+        const handleClick = (e: any) => {
             console.log(e)
             state.msg = '哈哈，我修改了这个数据啦，哈哈'
             ElMessage('只是一条消息提示')
